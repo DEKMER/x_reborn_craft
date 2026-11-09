@@ -126,7 +126,7 @@
       var canvas = document.querySelector("#game-canvas");
       var loader = document.querySelector("#loader");
       var fill = document.querySelector("#loader-fill");
-      var status = document.querySelector("#loader-status");
+      var loaderStatus = document.querySelector("#loader-status");
 
       // сообщения движка: предупреждения исчезают сами, ошибка остаётся
       function showNotice(message, type) {
@@ -141,12 +141,12 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/b0286b0ed72f683d724a0f0b999c86ff.loader.js";
+      var loaderUrl = buildUrl + "/280e285ff3c950f8dba275189524ba42.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/3bc003746c308e478b3e634cfd10d2f4.data.unityweb",
+        dataUrl: buildUrl + "/47993ef9ba7f781e70c222956c1956aa.data.unityweb",
         frameworkUrl: buildUrl + "/f626aa6ddc7424fd95d143ac178b183e.framework.js.unityweb",
-        codeUrl: buildUrl + "/6a51d5e29f9e4e45a1cc9339586a8123.wasm.unityweb",
+        codeUrl: buildUrl + "/acff8df901ceb993ec8aa11d2ee9f419.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "PANTHEON",
         productName: "XCRAFT",
@@ -166,18 +166,18 @@
         createUnityInstance(canvas, config, function (progress) {
           var percent = Math.round(progress * 100);
           fill.style.width = percent + "%";
-          status.textContent = percent < 100 ? "ЗАГРУЗКА " + percent + "%" : "ЗАПУСК…";
+          loaderStatus.textContent = percent < 100 ? "ЗАГРУЗКА " + percent + "%" : "ЗАПУСК…";
         }).then(function () {
           loader.classList.add("hidden");
           setTimeout(function () { loader.style.display = "none"; }, 450);
           canvas.focus();
         }).catch(function (message) {
-          status.textContent = "ОШИБКА ЗАПУСКА";
+          loaderStatus.textContent = "ОШИБКА ЗАПУСКА";
           showNotice(String(message), "error");
         });
       };
       script.onerror = function () {
-        status.textContent = "НЕ УДАЛОСЬ ЗАГРУЗИТЬ ИГРУ";
+        loaderStatus.textContent = "НЕ УДАЛОСЬ ЗАГРУЗИТЬ ИГРУ";
         showNotice("Проверьте подключение к интернету и обновите страницу.", "error");
       };
       document.body.appendChild(script);
